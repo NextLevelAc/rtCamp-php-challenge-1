@@ -121,7 +121,7 @@ if (!$conn) {
 
       try {foreach($mail as $value){
           $mail->send();
-        sleep(10);}
+        sleep(300);}
           echo "Message has been sent successfully";
       } catch (Exception $e) {
           echo "Mailer Error: " . $mail->ErrorInfo;
