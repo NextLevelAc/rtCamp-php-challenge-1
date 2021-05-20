@@ -119,8 +119,9 @@ if (!$conn) {
       $mail->AddCustomHeader('List-Unsubscribe', "<mailto:acpacy21@gmail.com?subject=Unsubscribe>,<http://localhost/phpchallenge1/logout.php/>");
 
 
-      try {
+      try {foreach($mail as $value){
           $mail->send();
+        sleep(10);}
           echo "Message has been sent successfully";
       } catch (Exception $e) {
           echo "Mailer Error: " . $mail->ErrorInfo;
