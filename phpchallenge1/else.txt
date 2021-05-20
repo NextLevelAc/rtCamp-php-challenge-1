@@ -1,0 +1,21 @@
+else{
+  $hash=password_hash($pass, PASSWORD_DEFAULT);
+  $confirmhash=password_hash($confirmpass, PASSWORD_DEFAULT);
+  $sql = "INSERT INTO users (fname, email, pass, confirmpass, token) VALUES ('$fname', '$email', '$hash', '$confirmhash', '$token')";
+  if ($conn->query($sql) === TRUE) {
+    ini_set( 'display_errors', 1 );
+    error_reporting( E_ALL );
+    $subject="email activation";
+    $body="hi, Click on the link to verify you email address http://localhost/login.php?token=$token";
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $sendersemail= "From: ashish.chauhan1994@gmail.com";
+
+    if(mail($email, $subject, $body, $headers, $sendersemail)){
+    $_SESSION['msg']="Check you email to verify your account $email";
+    header('location:confirmact.php');
+    }else{
+            echo "Error sending email <br>" . $conn->error;
+         }
+}
+}
